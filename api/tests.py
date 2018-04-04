@@ -6,6 +6,7 @@ from datetime import datetime
 class JsonActivityTestCase(TestCase):
     def setUp(self):
         pass
+        #test
 
     def test_time_equality(self):
         a = JsonActivity(1, '', 1, datetime(1970, 1, 1))
