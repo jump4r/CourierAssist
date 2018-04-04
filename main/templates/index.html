@@ -1,0 +1,22 @@
+{% extends "header.html" %}
+{% load staticfiles %}
+
+{% block meta %}
+<meta name="polyline" content="{{polyline}}" />
+<script defer type='application/javascript' src="{% static 'js/map.js' %}"></script>
+<script defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEYRNKhhpkO4vh1dUwSJ8EeChMf2HbXio&callback=initMap&libraries=geometry">
+</script>
+<script defer type="application/javascript" src="{% static 'js/polyline.js' %}"></script>
+<!-- Script to get Django Template Var into the DOM for use in later fucntions-->
+
+
+{% endblock %}
+
+{% block content %}
+<div class='index-body'>
+    Main Shit
+    <a href="{{auth_url}}">Authorize</a>
+    <div id='map'></div>
+</div>
+{% endblock %}
