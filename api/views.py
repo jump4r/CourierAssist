@@ -17,13 +17,15 @@ class JsonActivity(object):
         self.id = id
         self.polyline = polyline
         self.total_distance = total_distance
-        self.start_time = (start_time.replace(tzinfo=None) - EPOCH).total_seconds() # This makes the start time timezone naive...
+        self.start_time = self.timeDifference(start_time) # This makes the start time timezone naive...
 
         pprint(self.start_time)
 
     def toJson(self):
         return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
 
+    def timeDifference(self, t):
+        return (t.replace(tzinfo=None) - datetime(1970, 1, 1)).total_seconds()
 
 class JsonAthlete(object):
     pass
