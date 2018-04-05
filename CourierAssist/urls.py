@@ -20,5 +20,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^main/', include('main.urls', namespace='main')),
     url(r'^api/', include('api.urls', namespace='api')),
-    url(r'^accounts/', include('accounts.urls', namespace='accounts'))
+    url(r'^accounts/', include('accounts.urls', namespace='accounts')),
+    url(r'^restaurants/', include('restaurants.urls', namespace='restaurants'))
 ]

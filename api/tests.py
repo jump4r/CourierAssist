@@ -11,4 +11,4 @@ class JsonActivityTestCase(TestCase):
     def test_time_equality(self):
         a = JsonActivity(1, '', 1, datetime(1970, 1, 1))
         test_time = datetime(1970, 1, 1)
-        self.assertEqual(JsonActivity.timeDifference(a, test_time), 0)
+        self.assertEqual(a.timeDifference(test_time), 0)

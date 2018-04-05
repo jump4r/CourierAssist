@@ -1,0 +1,32 @@
+{% extends "header.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class='header-message'>
+    {{ message }}
+</div>
+
+<form name='/add_delivery/' method="POST">
+    {% csrf_token %}
+    <label for='name'>Restaurant Name: </label>
+    <input id='name-input' type='text' name='name' placeholder='Name'/>
+
+    <label for='time'>Time Accepted: </label>
+    <input id='time-input' type='datetime-local' name='time'/>
+
+    <label for='wait'>Wait Time: </label>
+    <input id='wait-input' type='number' step='0.01' name='wait'/>
+
+    <label for='distance'>Distance: </label>
+    <input id='distance-input' type='number' step='0.01' name='distance'/>
+
+    <label for='base'>Base Pay: </label>
+    <input id='base-input' type='number' step='0.01'  name='base'/>
+
+    <label for='tip'>Tip: </label>
+    <input id='tip-input' type='number' step='0.01' name='tip'/>
+
+    <input id='submit' type='submit' value='Submit' />
+</form>
+
+{% endblock %}

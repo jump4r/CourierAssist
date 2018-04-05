@@ -8,6 +8,8 @@ import datetime
 
 from CourierAssist import config_vars
 from accounts.models import AuthUser
+from restaurants.models import Restaurant
+from .models import Delivery
 
 # Create your views here.
 
@@ -44,13 +46,6 @@ def index(request):
         client.access_token = user.auth_code
         athlete = client.get_athlete()
 
-        """
-        before = datetime.datetime(2018, 3, 28)
-        after = datetime.datetime(2018, 3, 29)
-        activities = client.get_activities(limit=1)
-        f_activity = list(activities)[0]
-        """
-
         full_activity = client.get_activity(1486441471, True)
         
         a_polyline = full_activity.map.polyline
@@ -66,6 +61,60 @@ def index(request):
         "user_is_authenticated": request.user.is_authenticated 
     })
 
+def add_delivery(request):
+    pprint("Are we getting here?")
+    message = ""
+     
+    if (request.user.is_authenticated and request.method == "POST"):
+        # Get POST Vars, hopefully we can get Postamtes to open their API
+        # So I can get access to this shit.
+        # That's not gonna happen though.
+        _name = request.POST.get('name')
+        _address = "NOT IMPLEMENTED" # request.POST.get('address')
+        _time = request.POST.get('time')
+        _wait = request.POST.get('wait')
+        _distance = request.POST.get('distance')
+        _base = float(request.POST.get('base'))
+        _tip = float(request.POST.get('tip'))
+        
+        # Update Our Restaurant Table
+        try:
+            r = Restaurant.objects.get(name=_name)
+            message = "Delivery Already Added, updating"
+
+            _total_tips = 0 if _tip <= 0 else 1
+            r.total_tips += _total_tips
+            r.total_tip_amount += _tip
+
+            r.total_earnings += _base
+            r.total_deliveries += 1
+            r.save()
+
+
+        except Restaurant.DoesNotExist:
+            _total_tips = 0 if _tip <= 0 else 1
+            r = Restaurant(name=_name, total_earnings=_base, total_tips=_total_tips, total_tip_amount=_tip)
+            r.save()
+
+        pprint(r)
+        message = "Delivery Added To Database"
+
+        # Update Our Delivery Table
+        d = Delivery(
+            user_id=request.user.id,
+            restaurant=r,
+            service="POSTMATES",
+            address=_address,
+            time_accepted=_time,
+            wait_time=_wait,
+            distance=_distance,
+            base_earning=_base,
+            tip=_tip
+        )
+
+        d.save()
+        
+    return render(request, "add.html", {"message": message})
 
 def jresp(requrest):
     

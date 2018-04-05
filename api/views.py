@@ -52,10 +52,7 @@ def rides(request):
     for a in list_activities:
         detailed_activity = client.get_activity(a.id)
         _new_activity = JsonActivity(detailed_activity.id, detailed_activity.map.polyline, a.distance, a.start_date)
-        pprint(detailed_activity.id)
         rtn_activity_list.append(_new_activity.toJson())
- 
-    pprint(rtn_activity_list)
     
     rtn = {
         "user_auth": True,
