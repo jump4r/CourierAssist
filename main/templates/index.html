@@ -3,6 +3,7 @@
 
 {% block meta %}
 <meta name="polyline" content="{{polyline}}" />
+<script async type="application/javascript" src="{% static 'js/jsCalendar.js' %}"></script>
 <script defer type='application/javascript' src="{% static 'js/map.js' %}"></script>
 <script defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEYRNKhhpkO4vh1dUwSJ8EeChMf2HbXio&callback=initMap&libraries=geometry">
@@ -18,6 +19,77 @@
     Main Shit
     <a href="{{auth_url}}">Authorize</a>
     <div id='map'></div>
-    <div class='auto-jsCalendar'></div>
+    <div class='auto-jsCalendar'>
+        <table class='js-calendar'>
+            <tr class='calendar-header'>
+                <td class='calendar-previous'>Previous</td>
+                <td colspan='5'>Calendar</td>
+                <td class='calendar-next'>Next</td>
+            </tr>
+            <tr>
+                <td class='calendar-day'>Sun</td>
+                <td class='calendar-day'>Mon</td>
+                <td class='calendar-day'>Tue</td>
+                <td class='calendar-day'>Wed</td>
+                <td class='calendar-day'>Thu</td>
+                <td class='calendar-day'>Fri</td>
+                <td class='calendar-day'>Sat</td>
+            </tr>
+            <tr>
+                <td class='calendar-date'>1</td>
+                <td class='calendar-date'>2</td>
+                <td class='calendar-date'>3</td>
+                <td class='calendar-date'>4</td>
+                <td class='calendar-date'>5</td>
+                <td class='calendar-date'>6</td>
+                <td class='calendar-date'>7</td>
+            </tr>
+            <tr>
+                <td class='calendar-date'>8</td>
+                <td class='calendar-date'>9</td>
+                <td class='calendar-date'>10</td>
+                <td class='calendar-date'>11</td>
+                <td class='calendar-date'>12</td>
+                <td class='calendar-date'>13</td>
+                <td class='calendar-date'>14</td>
+            </tr>
+            <tr>
+                <td class='calendar-date'>15</td>
+                <td class='calendar-date'>16</td>
+                <td class='calendar-date'>17</td>
+                <td class='calendar-date'>18</td>
+                <td class='calendar-date'>19</td>
+                <td class='calendar-date'>20</td>
+                <td class='calendar-date'>21</td>
+            </tr>
+            <tr>
+                <td class='calendar-date'>15</td>
+                <td class='calendar-date'>16</td>
+                <td class='calendar-date'>17</td>
+                <td class='calendar-date'>18</td>
+                <td class='calendar-date'>19</td>
+                <td class='calendar-date'>20</td>
+                <td class='calendar-date'>21</td>
+            </tr>
+            <tr>
+                <td class='calendar-date'>15</td>
+                <td class='calendar-date'>16</td>
+                <td class='calendar-date'>17</td>
+                <td class='calendar-date'>18</td>
+                <td class='calendar-date'>19</td>
+                <td class='calendar-date'>20</td>
+                <td class='calendar-date'>21</td>
+            </tr>
+            <tr>
+                <td class='calendar-date'>15</td>
+                <td class='calendar-date'>16</td>
+                <td class='calendar-date'>17</td>
+                <td class='calendar-date'>18</td>
+                <td class='calendar-date'>19</td>
+                <td class='calendar-date'>20</td>
+                <td class='calendar-date'>21</td>
+            </tr>
+        </table>
+    </div>
 </div>
 {% endblock %}
