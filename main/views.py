@@ -70,7 +70,7 @@ def add_delivery(request):
         # So I can get access to this shit.
         # That's not gonna happen though.
         _name = request.POST.get('name')
-        _address = "NOT IMPLEMENTED" # request.POST.get('address')
+        _address = request.POST.get('address')
         _time = request.POST.get('time')
         _wait = request.POST.get('wait')
         _distance = request.POST.get('distance')

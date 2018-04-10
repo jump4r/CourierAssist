@@ -7,3 +7,6 @@ class Restaurant(models.Model):
     total_earnings = models.FloatField()
     total_tips = models.IntegerField(default=0)
     total_tip_amount = models.FloatField()
+
+    def __str__(self):
+        return self.name

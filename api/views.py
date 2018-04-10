@@ -4,11 +4,14 @@ from stravalib.client import Client
 from stravalib import model
 
 from accounts.models import AuthUser
+from main.models import Delivery
+from . import dates
 
 from pprint import pprint
 from datetime import timedelta, datetime
 
 import json
+from pprint import pprint
 
 EPOCH = datetime(1970, 1, 1)
 
@@ -27,8 +30,21 @@ class JsonActivity(object):
     def timeDifference(self, t):
         return (t.replace(tzinfo=None) - datetime(1970, 1, 1)).total_seconds()
 
-class JsonAthlete(object):
-    pass
+"""
+class JsonDeliviery(object):
+    def __init__(self, restaurant, service, time, address, wait, distance, base, tip):
+        self.restaurant = restaurant
+        self.service = service
+        self.time = time
+        self.address = address
+        self.distance = distance
+        self.wait = wait
+        self.base = base
+        self.tip = tip
+
+    def toJson(self):
+        return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
+"""
 
 # Create your views here.
 # Requests a list of all rides from Strava API
@@ -60,3 +76,37 @@ def rides(request):
     }
 
     return JsonResponse(rtn)
+
+# Get the user activites for 
+def monthly_deliveries(request, year, month):
+
+    _year = int(year)
+    _month = int(month) - 1
+
+    pprint(_month)
+    
+    if (not request.user.is_authenticated):
+        return JsonResponse({"user_auth": False})
+
+    numDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    pprint(numDays[4])
+
+    _before = datetime(_year, _month + 1, numDays[_month])
+    _after = datetime(_year, _month + 1, 1)
+
+    all_user_deliveries = Delivery.objects.all().filter(user_id=request.user.id).values()
+
+    for d in list(all_user_deliveries):
+        pprint(d["time_accepted"])
+
+    rtn_activity_list = []
+
+    rtn = {
+        "user_auth": True,
+        "deliveries": list(all_user_deliveries)
+    }
+
+    return JsonResponse(rtn)
+    
+    
+
